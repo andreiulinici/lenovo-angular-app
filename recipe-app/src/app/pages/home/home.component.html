@@ -9,7 +9,9 @@
     [(ngModel)]="searchValue"
     (ngModelChange)="filterValues()"
   />
+  <button class="add-button" (click)="redirectToAddRecipe()">Add Recipe</button>
 </div>
+
 {{ searchValue }}
 <div class="card-container">
   <!-- <app-recipe-card [recipe]="recipes[0]"></app-recipe-card>

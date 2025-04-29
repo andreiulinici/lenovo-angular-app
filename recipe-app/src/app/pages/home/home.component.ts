@@ -3,6 +3,7 @@ import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.co
 import { Recipe } from '../../interfaces/recipe.interface';
 import { RecipesService } from '../../services/recipes.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent {
   errorMessage: any = '';
   searchValue = '';
 
-  constructor(recipesService: RecipesService) {
+  constructor(recipesService: RecipesService, readonly router: Router) {
     this.recipes = recipesService.recipes;
     try {
       recipesService.getAllRecipes().subscribe({
@@ -40,5 +41,9 @@ export class HomeComponent {
     this.filteredRecipes = this.dummyRecipes.filter((recipe) =>
       recipe.name.toUpperCase().includes(this.searchValue.toUpperCase())
     );
+  }
+
+  redirectToAddRecipe() {
+    this.router.navigateByUrl('add-recipe');
   }
 }
