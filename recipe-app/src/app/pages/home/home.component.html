@@ -18,7 +18,7 @@
   <app-recipe-card [recipe]="recipes[1]"></app-recipe-card>
   <app-recipe-card [recipe]="recipes[2]"></app-recipe-card> -->
 
-  @for (recipe of filteredRecipes; track $index) {
+  @for (recipe of dbRecipes; track $index) {
   <app-recipe-card [recipe]="recipe"></app-recipe-card>
   } @empty {
   <div>No items to display</div>

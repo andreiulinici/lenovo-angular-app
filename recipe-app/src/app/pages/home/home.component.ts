@@ -4,6 +4,7 @@ import { Recipe } from '../../interfaces/recipe.interface';
 import { RecipesService } from '../../services/recipes.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { db } from '../../db/db';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent {
   recipes: Recipe[] = [];
   dummyRecipes!: Recipe[];
   filteredRecipes!: Recipe[];
+  dbRecipes!: any[];
   errorMessage: any = '';
   searchValue = '';
 
@@ -35,6 +37,15 @@ export class HomeComponent {
     } catch (error) {
       this.errorMessage = error;
     }
+
+    db.subscribeQuery({ recipes: {} }, (resp) => {
+      if (resp.error) {
+        this.errorMessage = resp.error;
+      }
+      if (resp.data) {
+        this.dbRecipes = resp.data.recipes;
+      }
+    });
   }
 
   filterValues() {
